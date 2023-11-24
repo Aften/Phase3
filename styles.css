@@ -1,0 +1,158 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #EEEEEE;
+}
+
+header {
+    background-color: #232931;
+    color: white;
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title-search-container {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+#homeLink {
+    text-decoration: none;
+    color: #EEEEEE;
+}
+
+#homeLink h1 {
+    margin-right: 20px;
+}
+
+#homeLink:hover {
+    color: #4ECCA3;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.search-container button {
+    padding: 5px 10px;
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.search-container button:hover {
+    background-color: #4ECCA3;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    margin-right: 20px;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav button {
+    padding: 10px 20px;
+    background-color: #393E46;
+    color: #EEEEEE;
+    border: none;
+    cursor: pointer;
+}
+
+nav button:hover {
+    background-color: #4ECCA3;
+}
+
+.hidden {
+    display: none;
+}
+
+.content {
+    padding: 20px;
+}
+
+.filterContainer {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.filterContainer select {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+#ticketSection {
+    padding: 20px;
+    text-align: center;
+}
+
+.ticket-info {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.concert-image {
+    width: 100px;
+    height: auto;
+    margin-right: 20px;
+}
+
+.ticket-details {
+    display: flex;
+    flex-grow: 1;
+}
+
+.concert-info {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.concert-info h3, .concert-info p {
+    margin: 0;
+}
+
+.time-info p {
+    margin: 0;
+    text-align: left; 
+    font-weight: bold;
+}
+
+.time-info p1 {
+    margin: 0;
+    text-align: left; 
+}
+
+.see-tickets-btn {
+    background-color: #4ECCA3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.see-tickets-btn:hover {
+    background-color: #3ea482;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Aggregation Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="title-search-container">
+            <a href="index.html" id="homeLink"><h1>Event Aggregation Website</h1></a>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search events...">
+                <button id="searchBtn">Search</button>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><button id="concertBtn">Concert Tickets</button></li>
+                <li><button id="sportsBtn">Sports Tickets</button></li>
+                <li><button id="artsBtn">Arts/Theatre Tickets</button></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="content">
+        <div class="filterContainer hidden" id="dateFilter">
+            <label>Filter by Date:</label>
+            <select>
+                <option value="all-dates">All dates</option>
+                <option value="today">Today</option>
+                <option value="this-weekend">This weekend</option>
+                <option value="this-month">This month</option>
+            </select>
+        </div>
+        <div class="filterContainer hidden" id="genreFilter">
+            <label>Filter by Genre:</label>
+            <select>
+                <option value="all-genres">All Genres</option>
+                <option value="pop-rock">Pop/Rock</option>
+                <option value="alternative">Alternative Music</option>
+                <option value="classical">Classical</option>
+                <option value="rnb">R&B</option>
+                <option value="rap-hiphop">Rap and Hip-Hop</option>
+                <option value="dance-electronic">Dance and Electronic</option>
+            </select>
+        </div>
+        <section id="ticketSection">
+            <h2>Home Page</h2>
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
