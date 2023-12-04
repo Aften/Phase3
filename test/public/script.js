@@ -17,7 +17,7 @@ document.getElementById('concertBtn').addEventListener('click', () => {
     document.getElementById('genreFilter').classList.remove('hidden');
     // Displays 10 concert tickets, change this so that it will be displayed depending the amount required from API calls.
     //displayTicketsAmountFunction('concert', concertTicketsAmount, 'Date', 'Time');
-    loadEvents();
+    loadEvents();  // temporary
 });
 
 // Event listener for the sports nav bar button.
@@ -64,6 +64,7 @@ function loadTickets(category) {
     ticketSection.innerHTML = `<h2>${category.charAt(0).toUpperCase() + category.slice(1)} Tickets</h2>`;
 }
 
+// Function to load the events from the data from the database
 async function loadEvents() {
 	try {
         const response = await fetch('/api/events');
@@ -74,11 +75,12 @@ async function loadEvents() {
     }
 }
 
+// Function that uses displayTicketSectionFunction to display the tickets from the database
 async function displayEvents(events) {
     const ticketSection = document.getElementById('ticketSection');
     ticketSection.innerHTML = '';
     events.forEach(event => {
-        displayTicketSectionFunction(event.title, event.location, event.datetime, event.url);
+        displayTicketSectionFunction(event.title, event.name, event.city, event.state, event.datetime, event.url);
     });
 }
 
@@ -94,7 +96,8 @@ function displayTicketsAmountFunction(category, ticketAmount, dateValue, timeVal
 }
 
 // Function to actually display the tickets in the UI, change the input parameters based on the data gathered from SQL.
-function displayTicketSectionFunction(eventName, eventLocation, eventDateTime, eventURL) {
+// Adjustments to the parameters
+function displayTicketSectionFunction(eventName, eventLocation, eventCity, eventState, eventDateTime, eventURL) {
 
     const ticketSection = document.getElementById('ticketSection');
     const ticketSectionHTML = `
@@ -108,7 +111,7 @@ function displayTicketSectionFunction(eventName, eventLocation, eventDateTime, e
                 </div>
                 <div class="concert-info">
                     <h3>${eventName}</h3>
-                    <p>${eventLocation}</p>
+                    <p>${eventLocation} - ${eventCity}, ${eventState}</p>
                 </div>
             </div>
             <button class="see-tickets-btn">See Tickets</button>
@@ -121,6 +124,7 @@ function displayTicketSectionFunction(eventName, eventLocation, eventDateTime, e
 
     const lastButton = buttons[buttons.length - 1];
 
+    // button leads to the website based on url
     lastButton.addEventListener('click', () => window.location.href = eventURL);
 }
 
@@ -130,11 +134,23 @@ function seeTicketsClicked(eventName, eventLocation) {
 }
 
 // Placeholder search function, implement the actual search functionality here.
-function performSearch() {
+async function performSearch() {
     const query = document.getElementById('searchInput').value;
-    alert(`Search for: ${query}`);
+    //alert(`Search for: ${query}`);
 
-
+    // fetch the search results and show the data from the search
+    try {
+        const response = await fetch(`/api/events/search?searched=${query}`)
+        if (!response.ok) {
+            throw new Error('Failed to fetch search');
+        }
+        console.log(response);
+        const searchData = await response.json();
+        displayEvents(searchData);
+    } catch (error) {
+        console.error('Failed to search:', error);
+    }
+    
 }
 
 // Function designed to display the tickets based on the filter value, change this function to do so. Currently just filters the amount of tickets as a palceholder logic.

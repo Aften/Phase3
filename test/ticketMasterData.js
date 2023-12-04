@@ -30,13 +30,24 @@ client.connect();
 const exp = express();
 
 exp.use(express.static('public'));
-exp.get('/', (req, res) => {
-	res.sendFile(process.cwd() + '/index.html');
+exp.get('/', (req, out) => {
+	out.sendFile(process.cwd() + '/index.html');
 });
 
-exp.get('/api/events', async (req, out) => {  // database of events table only into json
+exp.get('/api/events', async (req, out) => {  // database of event and venue table into json
 	try {
-		const result = await client.query('SELECT * FROM event');
+		const result = await client.query('SELECT * FROM event, venue LIMIT 20');
+		out.json(result.rows);
+	} catch (error) {
+		console.error(error);
+		out.status(500).send('Internal Server Error');
+	}
+});
+
+exp.get('/api/events/search', async (req, out) => {  //  get data based on search results
+	const { searched } = req.query;
+	try {
+		const result = await client.query('SELECT * FROM event WHERE LOWER(title) LIKE LOWER($1) LIMIT 20', [`%${searched}%`]);
 		out.json(result.rows);
 	} catch (error) {
 		console.error(error);
