@@ -35,8 +35,9 @@ exp.get('/', (req, out) => {
 });
 
 exp.get('/api/events', async (req, out) => {  // database of event and venue table into json
+	const { genre } = req.query;
 	try {
-		const result = await client.query('SELECT * FROM event, venue LIMIT 20');
+		const result = await client.query('SELECT * FROM event, venue WHERE event.venueId = venue.venueId AND LOWER(event.genre) = LOWER($1) LIMIT 20', [`${genre}`]);
 		out.json(result.rows);
 	} catch (error) {
 		console.error(error);
@@ -47,7 +48,7 @@ exp.get('/api/events', async (req, out) => {  // database of event and venue tab
 exp.get('/api/events/search', async (req, out) => {  //  get data based on search results
 	const { searched } = req.query;
 	try {
-		const result = await client.query('SELECT * FROM event WHERE LOWER(title) LIKE LOWER($1) LIMIT 20', [`%${searched}%`]);
+		const result = await client.query('SELECT * FROM event, venue WHERE LOWER(event.title) LIKE LOWER($1) AND event.venueId = venue.venueId LIMIT 20', [`%${searched}%`]);
 		out.json(result.rows);
 	} catch (error) {
 		console.error(error);
@@ -104,7 +105,7 @@ async function createDatabase() {
 		console.log('Vendor was sucessfully added.');
 	}
 
-	for (let page = 0; page <= 0; page++) {  // go through pages (more pages = more data for database)
+	for (let page = 0; page <= 5; page++) {  // go through pages (more pages = more data for database)
 		const events = await fetchEvents(page);  // get the data from page
 
 		// Go through the events
@@ -144,8 +145,8 @@ async function createDatabase() {
 			}
 
 			var insertEvent = {  // insert query
-				text: 'INSERT INTO event(eventId, venueId, vendorId, datetime, title, url, ageRestricted, lowestPrice, highestPrice) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-				values: [event.id, venue.id, 0, event.dates.start.dateTime || 'N/A', event.name, event.url, event.ageRestriction || false, min, max],
+				text: 'INSERT INTO event(eventId, venueId, vendorId, datetime, title, url, genre, image, ageRestricted, lowestPrice, highestPrice) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+				values: [event.id, venue.id, 0, event.dates.start.dateTime || 'N/A', event.name, event.url, event.classifications[0].segment.name, event.images[0].url || '', event.ageRestriction || false, min, max],
 			}
 
 			var checkEvent = {  // select query to see count of events

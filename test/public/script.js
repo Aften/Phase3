@@ -17,7 +17,7 @@ document.getElementById('concertBtn').addEventListener('click', () => {
     document.getElementById('genreFilter').classList.remove('hidden');
     // Displays 10 concert tickets, change this so that it will be displayed depending the amount required from API calls.
     //displayTicketsAmountFunction('concert', concertTicketsAmount, 'Date', 'Time');
-    loadEvents();  // temporary
+    loadEvents('concert');  // temporary
 });
 
 // Event listener for the sports nav bar button.
@@ -26,7 +26,7 @@ document.getElementById('sportsBtn').addEventListener('click', () => {
     document.getElementById('dateFilter').classList.remove('hidden');
     document.getElementById('genreFilter').classList.add('hidden');
     // Displays 5 sports tickets, change this so that it will be displayed depending the amount required from API calls.
-    displayTicketsAmountFunction('sports', sportsTicketsAmount, 'Date', 'Time');
+    loadEvents('sports');
 });
 
 // Event listener for the arts nav bar button.
@@ -35,7 +35,7 @@ document.getElementById('artsBtn').addEventListener('click', () => {
     document.getElementById('dateFilter').classList.remove('hidden');
     document.getElementById('genreFilter').classList.add('hidden');
     // Displays 15 arts related tickets, change this so that it will be displayed depending the amount required from API calls.
-    displayTicketsAmountFunction('arts', artsTicketsAmmount, 'Date', 'Time');
+    loadEvents('music');
 });
 
 let currentFilter = {
@@ -65,9 +65,12 @@ function loadTickets(category) {
 }
 
 // Function to load the events from the data from the database
-async function loadEvents() {
+async function loadEvents(genre) {
 	try {
-        const response = await fetch('/api/events');
+        const response = await fetch(`/api/events?genre=${genre}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch search');
+        }
         const eventsData = await response.json();
         displayEvents(eventsData);
     } catch (error) {
@@ -80,7 +83,7 @@ async function displayEvents(events) {
     const ticketSection = document.getElementById('ticketSection');
     ticketSection.innerHTML = '';
     events.forEach(event => {
-        displayTicketSectionFunction(event.title, event.name, event.city, event.state, event.datetime, event.url);
+        displayTicketSectionFunction(event.title, event.name, event.city, event.state, event.datetime, event.url, event.image);
     });
 }
 
@@ -97,13 +100,13 @@ function displayTicketsAmountFunction(category, ticketAmount, dateValue, timeVal
 
 // Function to actually display the tickets in the UI, change the input parameters based on the data gathered from SQL.
 // Adjustments to the parameters
-function displayTicketSectionFunction(eventName, eventLocation, eventCity, eventState, eventDateTime, eventURL) {
+function displayTicketSectionFunction(eventName, eventLocation, eventCity, eventState, eventDateTime, eventURL, eventImage) {
 
     const ticketSection = document.getElementById('ticketSection');
     const ticketSectionHTML = `
         <div class="ticket-info">
             <!-- Content of the ticket info section -->
-            <img src="PlaceholderImg.jpg" alt="Event Image" class="concert-image">
+            <img src='${eventImage}' alt="Event Image" class="concert-image">
             <div class="ticket-details">
                 <div class="time-info">
                     <p>DateTime</p>
