@@ -13,6 +13,38 @@
 - Then using your terminal navigate to inside the downloaded folder.
 - Next run the command: "flask run". This will generate a link to the website:
 
+To utilize the Event Aggregation Website, you will need to install Python. 
+
+Python can be downloaded at: https://www.python.org/
+
+Ensure that you set the python environment variables during installation.
+
+Once that is complete, you will need to install pip to download necessary database libraries.
+https://pypi.org/project/pip/
+
+Once pip has been installed, you can utilize it to download Flask, the primary back-end framework our application uses to run the database.
+You can utilize this command to download pip
+
+$ pip install -U Flask
+
+From there, you will need to download Node.JS for the javascript functionalities in our applicaiton.
+This can be found here:
+https://nodejs.org/en
+
+From here, you are now able to run the application. Download the repository from the GitHub.
+GitHub: https://github.com/Aften/Phase3
+
+From there, find the location of the repository using your command line of choice. 
+Ensure that you are able to Python by calling:
+
+python --version
+
+Ensure that you are able to Python by calling:
+
+flask --version
+
+If these two are properly installed and you are able to see the version, you can run the software by entering "flask run" through the terminal while in the applications file directory
+
 ![test3](https://github.com/Aften/Phase3/assets/34137769/c6ea6d70-2cee-48d7-a7b3-f0e7f42c2cd5)
 
 - Finally copy and paste the address into a web browser of your choice.
