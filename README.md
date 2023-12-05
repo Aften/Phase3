@@ -3,7 +3,7 @@
 ## Project Overview:
 - This project is designed to populate a simple website to display ticket information to the user. 
 - It was made using HTML, CSS, JavaScript, FLASK, and SQLITE3. 
-- The API's used to populate the SQL database is StubHub and TicketMaster.
+- The API's used to populate the SQL database are StubHub and TicketMaster.
 - The SQL database is populated at runtime from data gathered from the API calls. We decided to use FLASK to handle the SQL queries as it has an optimal runtime for our project scope and it allows us to easily see and edit the database when needed.
 
 ## User Manual:
