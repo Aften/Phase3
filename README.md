@@ -22,11 +22,11 @@
 - It displays the origin of the ticket, that being either StubHub or TicketMaster. It also displays the lowest and highest prices available for each ticket. 
 - Lastly it displays the link to purchase the ticket.
 
-![1](https://github.com/Aften/Phase3/assets/34137769/48fadd53-f859-4847-a68f-7b75971f67cd)
+![1](https://github.com/Aften/Phase3/assets/34137769/b58e5274-d73a-43de-a07f-1da722f7f91e)
 
 - You can also click on the 'Event Aggregation Website' text in the top left of the navigation bar to refresh the home screen:
 
-![1](https://github.com/Aften/Phase3/assets/34137769/3e8ada23-86df-4f27-b3d2-d7069513788d)
+![finally](https://github.com/Aften/Phase3/assets/34137769/becd743e-9ead-4cc7-a6bd-8a565d04f727)
 
 ### How to purchase a ticket:
 - Once you find a ticket you're interested in purchasing, simply copy and paste the link into another browser tab to purchase.
