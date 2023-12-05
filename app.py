@@ -24,22 +24,12 @@ def create_db():
     db =  g._database = sqlite3.connect('db.sqlite' , check_same_thread=False)
     cursor = db.cursor()
 
-    cursor.execute("CREATE TABLE GTA (release_year integer, release_name text, city text);")
+    #Create Tables
+    cursor.execute("CREATE TABLE vendor (    vendorId VARCHAR(255) PRIMARY KEY,    vendorName VARCHAR(255) NOT NULL);")
+    cursor.execute("CREATE TABLE venue (   venueId VARCHAR(255) PRIMARY KEY,   name VARCHAR(255) NOT NULL,   country VARCHAR(255) NOT NULL,   city VARCHAR(255) NOT NULL,   address VARCHAR(255) NOT NULL,   state VARCHAR(255) NOT NULL);") 
+    cursor.execute("CREATE TABLE event(    eventId VARCHAR(255) PRIMARY KEY,    venueId VARCHAR(255) NOT NULL,    vendorId VARCHAR(255) NOT NULL,    datetime VARCHAR(255) NOT NULL,    title VARCHAR(255) NOT NULL,    url VARCHAR(255) NOT NULL,    ageRestricted BOOLEAN NOT NULL,    lowestPrice FLOAT NOT NULL,    highestPrice FLOAT NOT NULL);")
+    cursor.execute("CREATE TABLE performer (    performerId VARCHAR(255) NOT NULL,    performerName VARCHAR(255) NOT NULL,          eventId VARCHAR(255) NOT NULL)")
 
-    release_list = [
-        (1997, "Grand Theft Auto", "state of New Guernsey"),
-        (1999, "Grand Theft Auto 2", "Anywhere, USA"),
-        (2001, "Grand Theft Auto III", "Liberty City"),
-        (2002, "Grand Theft Auto: Vice City", "Vice City"),
-        (2004, "Grand Theft Auto: San Andreas", "state of San Andreas"),
-        (2008, "Grand Theft Auto IV", "Liberty City"),
-        (2013, "Grand Theft Auto V", "Los Santos")
-    ]    
-
-
-    cursor.executemany("INSERT INTO GTA VALUES (?,?,?)", release_list)
-
-    cursor.execute("SELECT release_name from GTA;")
 
     result = cursor.fetchall()
     result = [str(val[0]) for val in result]
