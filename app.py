@@ -13,17 +13,17 @@ def index():
         os.remove("db.sqlite")
         print("Deleting original DB", file=sys.stdout)    
 
-    data = create_db()
+    ticketmasterdata = create_db1()
+
    
     print("Acquired DB", file=sys.stdout)
-    return render_template("index.html", all_data = data)
+    return render_template("index.html", all_ticketmaster_data = ticketmasterdata)
 
-def create_db():
+def create_db1():
     print("Create_db", file=sys.stdout)    
     conn = sqlite3.connect('db.sqlite' , check_same_thread=False)
     
     cursor = conn.cursor()
-
     #Create Vendors
     cursor.execute("CREATE TABLE vendor (vendorId TEXT,vendorName TEXT NOT NULL, PRIMARY KEY (vendorId));")
     
@@ -33,7 +33,8 @@ def create_db():
     cursor.execute("INSERT INTO vendor (vendorId, vendorName) VALUES (?,?)", data_tuple)    
 
     
-    
+###########################################################################################################
+
     #Create Venues
     cursor.execute("CREATE TABLE venue (venueId TEXT, name TEXT NOT NULL, country TEXT NOT NULL, city TEXT NOT NULL, address TEXT NOT NULL, state TEXT NOT NULL, PRIMARY KEY(venueId));") 
 
@@ -78,6 +79,26 @@ def create_db():
     
     data_tuple = ('K8vZ9171oa0', 'Golden State Warriors', 'G5vYZ9svBCs1O')
     cursor.execute("INSERT INTO performer (performerId, performerName, eventId) VALUES (?,?,?)",data_tuple)
+###########################################################################################################
+  #Create Venues
+    data_tuple = ('Chase Center','US', 'San Francisco', '300 16th Street', 'CA', '467029')
+    cursor.execute("INSERT INTO venue (name, country, city, address, state, venueId) VALUES(?,?,?,?,?,?)", data_tuple)
+    
+    data_tuple = ('Footprint Center','US', 'Phoenix', '201 East Jefferson Street', 'AZ', '130')
+    cursor.execute("INSERT INTO venue (name, country, city, address, state, venueId) VALUES(?,?,?,?,?,?)", data_tuple)
+
+   #Create events
+    data_tuple = ('6119957', '467029', 1, '2023-10-25T02:00:00', 'Phoenix Suns at Golden State Warriors','https://seatgeek.com/golden-state-warriors-tickets/10-24-2023-san-francisco-california-chase-center/nba/6119957',0, 207, 36965.0);
+    cursor.execute("INSERT INTO event( eventId, venueId, vendorId,datetime, title, url, ageRestricted, lowestPrice,highestPrice) VALUES (?,?,?,?,?,?,?,?,?)", data_tuple)
+
+    data_tuple = ('6120115', '130', 1, '2023-10-29T02:00:00', 'Jazz at Suns','https://seatgeek.com/phoenix-suns-tickets/10-28-2023-phoenix-arizona-footprint-center-2/nba/6120115',0, 72.0, 116660.0)
+    cursor.execute("INSERT INTO event( eventId, venueId, vendorId,datetime, title, url, ageRestricted, lowestPrice,highestPrice) VALUES (?,?,?,?,?,?,?,?,?)", data_tuple)
+ 
+
+
+    data_tuple = ('6120113', '130', 1, '2023-11-01T02:00:00', 'San Antonio Spurs at Phoenix Suns','https://seatgeek.com/phoenix-suns-tickets/10-31-2023-phoenix-arizona-footprint-center-2/nba/6120113',0, 59.0, 981.0)
+    cursor.execute("INSERT INTO event( eventId, venueId, vendorId,datetime, title, url, ageRestricted, lowestPrice,highestPrice) VALUES (?,?,?,?,?,?,?,?,?)", data_tuple)
+ 
 
     conn.commit()
     
@@ -87,10 +108,39 @@ def create_db():
     resultList = cursor.fetchall()
     result = [str(val[0]) for val in resultList]
     
-    cursor.execute("SELECT title FROM event WHERE event.vendorId = 0;")
+    cursor.execute("SELECT title, lowestPrice, highestPrice, url FROM event WHERE event.vendorId = 0;")
     resultList = cursor.fetchall()
-    result = [str(val[0]) for val in resultList]
     
+    iterator = 0
+    
+    for val in resultList:
+        result += [str(val[0])]
+        result += ["Lowest Price:"]
+        result += [str(val[1])]
+        result += ["Highest Price:"]
+        result += [str(val[2])]
+        result += ["URL:"]
+        result += [str(val[3])]
+        
+    
+    cursor.execute("SELECT vendorName FROM vendor WHERE vendor.vendorId = 1;")    
+    resultList = cursor.fetchall()
+    result += [str(val[0]) for val in resultList]
+    
+    cursor.execute("SELECT title, lowestPrice, highestPrice, url FROM event WHERE event.vendorId = 1;")
+    resultList = cursor.fetchall()
+    
+    iterator = 0
+    
+    for val in resultList:
+        result += [str(val[0])]
+        result += ["Lowest Price:"]
+        result += [str(val[1])]
+        result += ["Highest Price:"]
+        result += [str(val[2])]
+        result += ["URL:"]
+        result += [str(val[3])]
+
     return result
 
 @app.teardown_appcontext

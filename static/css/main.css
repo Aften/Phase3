@@ -5,6 +5,24 @@ body {
     background-color: #EEEEEE;
 }
 
+.float-container {
+    display: flex;
+}
+
+.float-child-ticketmaster {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid blue;
+}  
+
+.float-child-stubhub {
+    width: 50%;
+    float: left;
+    padding: 20px;
+    border: 2px solid purple;
+}  
+
 header {
     background-color: #232931;
     color: white;
