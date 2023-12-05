@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Aggregation Website</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
 </head>
 <body>
     <header>
+
         <div class="title-search-container">
-            <a href="index.html" id="homeLink"><h1>Event Aggregation Website</h1></a>
+            <a href="{{ url_for('index') }}" id="homeLink"><h1>Event Aggregation Website</h1></a>
             <div class="search-container">
                 <input type="text" id="searchInput" placeholder="Search events...">
                 <button id="searchBtn">Search</button>
@@ -24,6 +26,10 @@
         </nav>
     </header>
     <div class="content">
+        {% for item in all_data %}
+        <p>{{item}}</p>
+        {% endfor %}
+
         <div class="filterContainer hidden" id="dateFilter">
             <label>Filter by Date:</label>
             <select>
@@ -49,6 +55,6 @@
             <h2>Home Page</h2>
         </section>
     </div>
-    <script src="script.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js')}}"></script>
 </body>
 </html>

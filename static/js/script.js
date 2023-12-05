@@ -3,6 +3,8 @@ var concertTicketsAmount = 0;
 var sportsTicketsAmount = 0;
 var artsTicketsAmmount = 0;
 
+print("javascript ran!")
+
 // Function to determine the amount of tickets per section, this is just placeholder logic, implement the functionality for it here:
 function setTicketValues() {
     concertTicketsAmount = 10;
@@ -114,6 +116,23 @@ function seeTicketsClicked(eventName, eventLocation) {
 function performSearch() {
     const query = document.getElementById('searchInput').value;
     alert(`Search for: ${query}`);
+
+    var apiUrl ="https://app.ticketmaster.com/discovery/v2/events?keyword=" + query + "&apiKey=8MQ1N4Wap8M24o9JBHcf1fPeuptpNVoy";
+    ajax({
+        type:"GET",
+        url:"https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey={apikey}",
+        async:true,
+        dataType: "json",
+        success: function(json) {
+                    console.log(json);
+                    // Parse the response.
+                    // Do other things.
+                 },
+        error: function(xhr, status, err) {
+                    // This time, we do not end up here!
+                 }
+      });
+
 }
 
 // Function designed to display the tickets based on the filter value, change this function to do so. Currently just filters the amount of tickets as a palceholder logic.
