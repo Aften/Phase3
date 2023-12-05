@@ -8,7 +8,7 @@
 ## User Manual:
 
 ### How to run the website:
-- To run the website you must first install Python flask
+- To run the website you must first install Python flask: https://flask.palletsprojects.com/en/3.0.x/installation/
 - Then using your terminal navigate to inside the downloaded folder.
 - Next run the command: "flask run". This will generate a link to the website:
 
