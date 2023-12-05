@@ -3,10 +3,19 @@
 ## Project Overview:
 - This project is designed to populate a simple website to display ticket information to the user. 
 - It was made using HTML, CSS, JavaScript, FLASK, and SQLITE3. 
-- The API used to populate the SQL database is StubHub.
+- The API's used to populate the SQL database is StubHub and TicketMaster.
 
 ## User Manual:
 
+### How to run the website:
+- To run the website you must first install Python flask
+- Then using your terminal navigate to inside the downloaded folder.
+- Next run the command: "flask run". This will generate a link to the website:
+
+![test3](https://github.com/Aften/Phase3/assets/34137769/c6ea6d70-2cee-48d7-a7b3-f0e7f42c2cd5)
+
+- Finally copy and paste the address into a web browser of your choice.
+  
 ### How to navigate the website:
 - The website navigation is simple, by default you are put into the Home page of the website. This section displays a user greeting and gives a brief explanation of the website and its purpose.
 - To navigate to other sections of the website simply click on either the 'Concert Tickets', 'Sports Tickets' or 'Arts/Theatre Tickets' sections as seen below:
