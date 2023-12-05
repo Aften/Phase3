@@ -11,7 +11,7 @@
 ### How to run the website:
 - To run the website you must first install Python flask: https://flask.palletsprojects.com/en/3.0.x/installation/
 - Then using your terminal navigate to inside the downloaded folder.
-- Next run the command: "flask run". This will generate a link to the website:
+- To generate the website follow the steps below:
 
 To utilize the Event Aggregation Website, you will need to install Python. 
 
@@ -43,7 +43,9 @@ Ensure that you are able to Python by calling:
 
 flask --version
 
-If these two are properly installed and you are able to see the version, you can run the software by entering "flask run" through the terminal while in the applications file directory
+If these two are properly installed and you are able to see the version, you can run the software by entering "flask run" through the terminal while in the applications file directory.
+
+Finally run the command: "flask run". This will generate a link to the website:
 
 ![test3](https://github.com/Aften/Phase3/assets/34137769/c6ea6d70-2cee-48d7-a7b3-f0e7f42c2cd5)
 
