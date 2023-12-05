@@ -1,4 +1,4 @@
-# NOTE THIS IS THE MANUAL FOR OUR INITIAL INTENDED DESIGN OF OUR WEBSITE!!! 
+# Event Aggregation Website
 
 ## Project Overview:
 - This project is designed to populate a simple website to display ticket information to the user. 
